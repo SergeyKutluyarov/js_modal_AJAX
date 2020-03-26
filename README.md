@@ -1,1 +1,3 @@
-Задание 9
+Use script.js
+
+// Form - formData or // Form - JSON
