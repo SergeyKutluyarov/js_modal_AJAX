@@ -224,49 +224,5 @@ form.addEventListener('submit', function(e) {
 });
 
 
-// Подключена форма контактов
-
-let formCont = document.getElementById('form'),
-    inputCont = formCont.getElementsByTagName('input'),
-    statusMessageCont = document.createElement('div');
-
-    statusMessageCont.classList.add('status');
-
-formCont.addEventListener('submit', function(e) {
-    e.preventDefault();
-    formCont.appendChild(statusMessageCont);
-
-    let request = new XMLHttpRequest();
-    request.open('POST', 'server.php');
-    request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-
-    let formData = new FormData(formCont);   // В HTML в input обязательно должен быть атрибут name
-
-    let obj = {};
-    formData.forEach(function(value, key) {
-        obj [key] = value;
-    });
-
-    let json = JSON.stringify(obj);
-
-    request.send(json);
-
-    request.addEventListener('readystatechange', function() {
-        if (request.readyState < 4) {
-            statusMessageCont.innerHTML = message.loading;                  // Вместо сообщений можно вставить прогрессбар или анимацию
-        } else if (request.readyState === 4 && request.status == 200) {   
-            statusMessageCont.innerHTML = message.success;
-        } else {
-            statusMessageCont.innerHTML = message.failure;
-        }
-    });
-
-    for (let i = 0; i < inputCont.length; i++) {
-        inputCont[i].value = '';
-    }
-
-});
-
-
 });
 
